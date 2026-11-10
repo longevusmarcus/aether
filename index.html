@@ -405,7 +405,7 @@ textarea:focus { border-color: var(--ember); }
     <div class="wm">AETHER</div>
     <p>Members-only app for Masha's community: lessons from the book, IRL challenges, a small Circle and limited gatherings.</p>
     <ul>
-      <li>Enter any invite code, then take the 10-question reading.</li>
+      <li>Tap Request an invite, then Preview as a member to take the 10-question reading.</li>
       <li>Join a challenge and add proof to fill your knot.</li>
       <li>Request a seat at a gathering.</li>
     </ul>
@@ -655,19 +655,12 @@ textarea:focus { border-color: var(--ember); }
         '<div class="knotwrap">' + KNOT() + "</div>" +
         '<div class="wm">AETHER</div><div class="tl">BEYOND THE VISIBLE</div><div class="pl">Consciousness · Connection · Expansion</div>' +
         '<div class="panel">' +
-          "<h2>Members only</h2><p>Aether is invite-only. Enter the code from your invitation to continue.</p>" +
-          '<form id="codeform" class="input" novalidate><input id="code" autocomplete="off" placeholder="Invite code" aria-label="Invite code"><button type="submit" aria-label="Continue"><i data-lucide="arrow-right"></i></button></form>' +
-          '<div class="err" id="err" role="alert"></div>' +
-          '<button class="btn ghost" id="request">Request an invite</button>' +
-          '<div class="foot"><span><span id="wait">0</span> on the waitlist</span><span>Prototype: any code works</span></div>' +
+          "<h2>Members only</h2><p>Aether is invite-only. Request an invite to join the waitlist.</p>" +
+          '<button class="btn" id="request">Request an invite</button>' +
+          '<div class="foot" style="justify-content:center"><span><span id="wait">0</span> on the waitlist</span></div>' +
         "</div></div>", { full: true });
     var w = document.getElementById("wait"), t0 = performance.now() + 3200;
     (function tick(now) { var p = Math.min(1, Math.max(0, (now - t0) / 1200)); w.textContent = Math.round(1204 * (1 - Math.pow(1 - p, 3))).toLocaleString("en-GB"); if (p < 1 && document.body.contains(w)) requestAnimationFrame(tick); })(performance.now());
-    document.getElementById("codeform").addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!document.getElementById("code").value.trim()) { document.getElementById("err").textContent = "Enter the code from your invitation."; return; }
-      startReading();
-    });
     document.getElementById("request").addEventListener("click", function () {
       sheet('<h2>Request received</h2><p>You\'re number 1,205 on the waitlist. Requests are reviewed every Sunday, and an invite from a member moves you to the front.</p><button class="btn" id="preview">Preview as a member</button>',
         function (el) { el.querySelector("#preview").addEventListener("click", function () { closeSheet(); startReading(); }); });
