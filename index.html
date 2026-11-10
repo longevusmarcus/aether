@@ -706,7 +706,7 @@ textarea:focus { border-color: var(--ember); }
       '<div class="pts" style="margin-top:12px">' + ORDER.map(function (k) { return '<div class="ptcard" style="--c:' + POINTS[k].color + '"><div class="top"><b>' + POINTS[k].name + "</b><span>" + Math.round(sc[k] * 100) + '</span></div><div class="prog"><span style="width:0" data-w="' + Math.round(sc[k] * 100) + '"></span></div></div>'; }).join("") + "</div>" +
       '<div style="margin-top:22px"><button class="btn" id="enter">Enter Aether</button></div></div>',
       { full: true, anim: "enter-right", after: function () {
-        var k = view.querySelector("#rk .knot"); k.setAttribute("style", ORDER.map(function (x) { return POINTS[x].k + ":var(--line)"; }).join(";"));
+        var k = view.querySelector("#rk .knot"); if (!k) return; k.setAttribute("style", ORDER.map(function (x) { return POINTS[x].k + ":var(--line)"; }).join(";"));
         requestAnimationFrame(function () { k.setAttribute("style", knotStyle(sc)); });
         Array.prototype.forEach.call(view.querySelectorAll("[data-w]"), function (b) { b.style.width = b.dataset.w + "%"; });
       } });
